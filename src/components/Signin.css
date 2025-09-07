@@ -1,0 +1,57 @@
+.signin-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .lock-icon {
+    font-size: 50px;
+    color: #ff005d;
+  }
+  
+  h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .signin-form {
+    margin: 0 auto;
+    width: 300px;
+  }
+  
+  .signin-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .btn-submit {
+    background-color: #3b53db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .btn-submit:hover {
+    background-color: #2a3ba1;
+  }
+  
+  .signup-link {
+    color: #ff005d;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .signup-link:hover {
+    color: #e00050;
+  }
+  
