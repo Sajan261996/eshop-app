@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home"; // ✅ Home icon
+import HomeIcon from "@mui/icons-material/Home";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,7 +60,7 @@ const AppBar = ({ onSearch }) => {
           <MenuIcon />
         </IconButton>
 
-        {/* Dropdown Menu */}
+        {/* Menu Dropdown */}
         <Menu anchorEl={anchorEl} open={open} onClose={() => handleMenuClose()}>
           <MenuItem onClick={() => handleMenuClose("/")}>Home</MenuItem>
           <MenuItem onClick={() => handleMenuClose("/add-product")}>Add Product</MenuItem>
@@ -73,7 +73,7 @@ const AppBar = ({ onSearch }) => {
           E-Shop
         </Typography>
 
-        {/* Search Bar */}
+        {/* Search */}
         <Search>
           <SearchInput
             placeholder="Search products..."
@@ -84,18 +84,13 @@ const AppBar = ({ onSearch }) => {
         {/* Spacer */}
         <Box sx={{ flexGrow: 1 }} />
 
-        {/* 🔹 Home Icon Button */}
-        <IconButton
-          color="inherit"
-          onClick={() => navigate("/")}
-          sx={{ ml: 1 }}
-          title="Home"
-        >
+        {/* Home Icon */}
+        <IconButton color="inherit" onClick={() => navigate("/")}>
           <HomeIcon />
         </IconButton>
 
-        {/* Auth Buttons */}
-        <Button color="inherit" onClick={() => navigate("/login")} sx={{ ml: 2 }}>
+        {/* Login/Signup */}
+        <Button color="inherit" onClick={() => navigate("/login")} sx={{ ml: 1 }}>
           Login
         </Button>
         <Button color="inherit" onClick={() => navigate("/signup")} sx={{ ml: 1 }}>

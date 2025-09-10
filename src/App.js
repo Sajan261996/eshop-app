@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppBar from "./components/AppBar";
 import Signup from "./components/Signup";
@@ -34,7 +34,7 @@ function App() {
         setCategories(["ALL", ...categoryResponse.data]);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setProducts([]); // fallback to empty
+        setProducts([]);
         setCategories(["ALL"]);
       } finally {
         setIsLoading(false);
@@ -52,7 +52,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
-          {/* ✅ Home page */}
+          {/* Home Page */}
           <Route
             path="/"
             element={
@@ -68,14 +68,14 @@ function App() {
             }
           />
 
-          {/* ✅ Product details */}
+          {/* Product Details */}
           <Route path="/product/:id" element={<ProductDetails products={products} />} />
 
-          {/* ✅ Orders and profile */}
+          {/* Orders & Profile */}
           <Route path="/orders" element={<OrderDetail />} />
           <Route path="/profile" element={<Profile />} />
 
-          {/* ✅ Catch-all redirect */}
+          {/* Catch-all redirect */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
