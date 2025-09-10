@@ -6,6 +6,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
+import OrderDetail from "./components/Orders"; 
+import Profile from "./components/Profile"; 
 import axios from "axios";
 
 const theme = createTheme({
@@ -16,6 +18,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,33 +42,40 @@ function App() {
     fetchData();
   }, []);
 
-  console.log("Products fetched:", products);
-
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <AppBar />
+        {/* ✅ Pass onSearch to AppBar */}
+        <AppBar onSearch={setSearchTerm} />
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Home route with products, categories */}
+          {/* ✅ Home Route */}
           <Route
             path="/"
             element={
               isLoading ? (
                 <p>Loading products...</p>
               ) : (
-                <Home products={products} categories={categories} />
+                <Home
+                  products={products}
+                  categories={categories}
+                  searchTerm={searchTerm} 
+                />
               )
             }
           />
 
-          {/* Product details route */}
+          {/* ✅ Product Details */}
           <Route
             path="/product/:id"
             element={<ProductDetails products={products} />}
           />
+
+          {/* ✅ Corrected Routes */}
+          <Route path="/orders" element={<OrderDetail />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </ThemeProvider>

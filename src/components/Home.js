@@ -1,8 +1,9 @@
+// Home.js
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Home.css";
 
-// Import all images from assets
+// Local fallback images
 import img1 from "../assets/bluetoothheadphones-2048px-0880.png";
 import img2 from "../assets/mensjacket.png";
 import img3 from "../assets/facewash.png";
@@ -19,72 +20,89 @@ import img13 from "../assets/DeskLamp.png";
 import img14 from "../assets/YogaMat.png";
 import img15 from "../assets/WaterBottle.png";
 
-const Home = ({ products: initialProducts, categories }) => {
-  const [addresses, setAddresses] = useState([]);
-  const [orders, setOrders] = useState([]);
+const Home = ({ products: initialProducts }) => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Fetch addresses
-  const fetchAddresses = async () => {
-    try {
-      const response = await fetch(
-        "https://dev-project-ecommerce.upgrad.dev/api/addresses"
-      );
-      const data = await response.json();
-      setAddresses(data);
-    } catch (error) {
-      console.error("Error fetching addresses:", error);
-    }
-  };
+  // ✅ Get search query from URL (/search?query=Headphones)
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("query")?.toLowerCase() || "";
 
-  // Fetch orders
-  const fetchOrders = async () => {
-    try {
-      const response = await fetch(
-        "https://dev-project-ecommerce.upgrad.dev/api/orders"
-      );
-      const data = await response.json();
-      setOrders(data);
-    } catch (error) {
-      console.error("Error fetching orders:", error);
-    }
-  };
+  // Dummy fallback products with details
+  const dummyProducts = [
+    {
+      id: 1,
+      name: "Wireless Headphones",
+      category: "Electronics",
+      price: 1999,
+      stock: 50,
+      rating: 4.5,
+      description: "High-quality wireless headphones with noise cancellation.",
+      image: img1,
+    },
+    {
+      id: 2,
+      name: "Men’s Jacket",
+      category: "Apparel",
+      price: 2499,
+      stock: 30,
+      rating: 4.2,
+      description: "Stylish winter jacket made with premium materials.",
+      image: img2,
+    },
+    {
+      id: 3,
+      name: "Face Wash",
+      category: "Personal Care",
+      price: 299,
+      stock: 100,
+      rating: 4.0,
+      description: "Gentle face wash suitable for all skin types.",
+      image: img3,
+    },
+    {
+      id: 4,
+      name: "Smartwatch",
+      category: "Electronics",
+      price: 3999,
+      stock: 25,
+      rating: 4.7,
+      description: "Feature-rich smartwatch with health tracking.",
+      image: img4,
+    },
+    {
+      id: 5,
+      name: "Sneakers",
+      category: "Footwear",
+      price: 3499,
+      stock: 40,
+      rating: 4.3,
+      description: "Comfortable and stylish sneakers for daily wear.",
+      image: img5,
+    },
+    // ✅ Add more dummy products as needed...
+  ];
 
-  // Load products
+  // Load products (API or fallback)
   useEffect(() => {
-    fetchAddresses();
-    fetchOrders();
-
     if (initialProducts && initialProducts.length > 0) {
       setProducts(initialProducts);
     } else {
-      // Dummy products with imported images
-      const dummyProducts = [
-        { id: 1, name: "Wireless Headphones", category: "Electronics", price: 1999, image: img1 },
-        { id: 2, name: "Men’s Jacket", category: "Apparel", price: 2499, image: img2 },
-        { id: 3, name: "Face Wash", category: "Personal Care", price: 299, image: img3 },
-        { id: 4, name: "Smartwatch", category: "Electronics", price: 3999, image: img4 },
-        { id: 5, name: "Sneakers", category: "Footwear", price: 3499, image: img5 },
-        { id: 6, name: "Bluetooth Speaker", category: "Electronics", price: 1599, image: img6 },
-        { id: 7, name: "Women’s Handbag", category: "Accessories", price: 1299, image: img7 },
-        { id: 8, name: "T-shirt Pack", category: "Apparel", price: 999, image: img8 },
-        { id: 9, name: "Sunglasses", category: "Accessories", price: 799, image: img9 },
-        { id: 10, name: "Laptop Backpack", category: "Accessories", price: 1899, image: img10 },
-        { id: 11, name: "Gaming Mouse", category: "Electronics", price: 1199, image: img11 },
-        { id: 12, name: "Coffee Mug Set", category: "Home & Kitchen", price: 499, image: img12 },
-        { id: 13, name: "Desk Lamp", category: "Home & Kitchen", price: 699, image: img13 },
-        { id: 14, name: "Yoga Mat", category: "Fitness", price: 1299, image: img14 },
-        { id: 15, name: "Water Bottle", category: "Fitness", price: 499, image: img15 },
-      ];
-
       setProducts(dummyProducts);
     }
   }, [initialProducts]);
 
-  // Navigate to product details
-  const handleProductClick = (id) => {
-    navigate(`/product/${id}`);
+  // ✅ Filter products by search query
+  const filteredProducts = products.filter(
+    (p) =>
+      p.name.toLowerCase().includes(searchQuery) ||
+      p.category.toLowerCase().includes(searchQuery)
+  );
+
+  // ✅ Open product details in new window
+  const handleProductClick = (product) => {
+    const productData = encodeURIComponent(JSON.stringify(product));
+    window.open(`/product/${product.id}?data=${productData}`, "_blank");
   };
 
   return (
@@ -93,56 +111,27 @@ const Home = ({ products: initialProducts, categories }) => {
 
       {/* Products Section */}
       <section className="products-section">
-        <h2>Products</h2>
-        {products.length === 0 ? (
-          <p>No products available</p>
+        <h2>{searchQuery ? `Search Results for "${searchQuery}"` : "Products"}</h2>
+        {filteredProducts.length === 0 ? (
+          <p>No products found</p>
         ) : (
           <div className="products-grid">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <div
                 key={product.id}
                 className="product-card"
-                onClick={() => handleProductClick(product.id)}
+                onClick={() => handleProductClick(product)}
               >
-                <img src={product.image} alt={product.name} />
+                <img
+                  src={product.image || product.imageUrl}
+                  alt={product.name}
+                />
                 <h3>{product.name}</h3>
                 <p>{product.category}</p>
-                <p>₹{product.price.toLocaleString()}</p>
+                <p>₹{Number(product.price).toLocaleString()}</p>
               </div>
             ))}
           </div>
-        )}
-      </section>
-
-      {/* Addresses Section */}
-      <section className="addresses-section">
-        <h2>Addresses</h2>
-        {addresses.length === 0 ? (
-          <p>No addresses found</p>
-        ) : (
-          <ul>
-            {addresses.map((address) => (
-              <li key={address.id}>
-                {address.name} - {address.city}, {address.state} ({address.zipcode})
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      {/* Orders Section */}
-      <section className="orders-section">
-        <h2>Orders</h2>
-        {orders.length === 0 ? (
-          <p>No orders found</p>
-        ) : (
-          <ul>
-            {orders.map((order) => (
-              <li key={order.id}>
-                Order ID: {order.id} - Quantity: {order.quantity} - Product: {order.product}
-              </li>
-            ))}
-          </ul>
         )}
       </section>
     </div>
