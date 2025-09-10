@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/eshop-app/static/css/main.1dcd5921.css",
+    "main.js": "/eshop-app/static/js/main.2040dab1.js",
+    "static/js/453.8a477f5c.chunk.js": "/eshop-app/static/js/453.8a477f5c.chunk.js",
+    "static/media/mensjacket.png": "/eshop-app/static/media/mensjacket.361923c48000bec5827d.png",
+    "static/media/DeskLamp.png": "/eshop-app/static/media/DeskLamp.7d1dd18dcaec11bbd6e7.png",
+    "static/media/bluetoothheadphones-2048px-0880.png": "/eshop-app/static/media/bluetoothheadphones-2048px-0880.e0518bd5d0c2f0eaf450.png",
+    "static/media/sunglasses.png": "/eshop-app/static/media/sunglasses.80cd9967c537887285e8.png",
+    "static/media/womenshandbag.png": "/eshop-app/static/media/womenshandbag.1c451c526291c2a2f7f6.png",
+    "index.html": "/eshop-app/index.html",
+    "main.1dcd5921.css.map": "/eshop-app/static/css/main.1dcd5921.css.map",
+    "main.2040dab1.js.map": "/eshop-app/static/js/main.2040dab1.js.map",
+    "453.8a477f5c.chunk.js.map": "/eshop-app/static/js/453.8a477f5c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1dcd5921.css",
+    "static/js/main.2040dab1.js"
+  ]
+}
