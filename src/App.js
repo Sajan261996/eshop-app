@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppBar from "./components/AppBar";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import ProductDetails from "./components/ProductDetails";
-import OrderDetail from "./components/Orders"; 
-import Profile from "./components/Profile"; 
+import OrderDetail from "./components/Orders";
+import Profile from "./components/Profile";
 import axios from "axios";
 
 const theme = createTheme({
@@ -34,6 +34,8 @@ function App() {
         setCategories(["ALL", ...categoryResponse.data]);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setProducts([]); // fallback to empty
+        setCategories(["ALL"]);
       } finally {
         setIsLoading(false);
       }
@@ -45,13 +47,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        {/* ✅ Pass onSearch to AppBar */}
         <AppBar onSearch={setSearchTerm} />
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
 
-          {/* ✅ Home Route */}
+          {/* ✅ Home page */}
           <Route
             path="/"
             element={
@@ -61,21 +62,21 @@ function App() {
                 <Home
                   products={products}
                   categories={categories}
-                  searchTerm={searchTerm} 
+                  searchTerm={searchTerm}
                 />
               )
             }
           />
 
-          {/* ✅ Product Details */}
-          <Route
-            path="/product/:id"
-            element={<ProductDetails products={products} />}
-          />
+          {/* ✅ Product details */}
+          <Route path="/product/:id" element={<ProductDetails products={products} />} />
 
-          {/* ✅ Corrected Routes */}
+          {/* ✅ Orders and profile */}
           <Route path="/orders" element={<OrderDetail />} />
           <Route path="/profile" element={<Profile />} />
+
+          {/* ✅ Catch-all redirect */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </ThemeProvider>

@@ -8,9 +8,12 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  Button,
+  Box,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home"; // ✅ Home icon
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -31,8 +34,6 @@ const SearchInput = styled(InputBase)(({ theme }) => ({
 
 const AppBar = ({ onSearch }) => {
   const navigate = useNavigate();
-
-  // 🔹 Menu state
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -48,7 +49,7 @@ const AppBar = ({ onSearch }) => {
   return (
     <MuiAppBar position="static">
       <Toolbar>
-        {/* 🔹 Menu Button */}
+        {/* Menu Button */}
         <IconButton
           size="large"
           edge="start"
@@ -59,18 +60,12 @@ const AppBar = ({ onSearch }) => {
           <MenuIcon />
         </IconButton>
 
-        {/* 🔹 Menu Dropdown */}
+        {/* Dropdown Menu */}
         <Menu anchorEl={anchorEl} open={open} onClose={() => handleMenuClose()}>
-          <MenuItem onClick={() => handleMenuClose("./Home.js")}>Home</MenuItem>
-          <MenuItem onClick={() => handleMenuClose("./AddProduct.js")}>
-            Add Product
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuClose("/orders")}>
-            Order Details
-          </MenuItem>
-          <MenuItem onClick={() => handleMenuClose("/profile")}>
-            Profile
-          </MenuItem>
+          <MenuItem onClick={() => handleMenuClose("/")}>Home</MenuItem>
+          <MenuItem onClick={() => handleMenuClose("/add-product")}>Add Product</MenuItem>
+          <MenuItem onClick={() => handleMenuClose("/orders")}>Order Details</MenuItem>
+          <MenuItem onClick={() => handleMenuClose("/profile")}>Profile</MenuItem>
         </Menu>
 
         {/* Title */}
@@ -78,13 +73,34 @@ const AppBar = ({ onSearch }) => {
           E-Shop
         </Typography>
 
-        {/* 🔎 Search Bar */}
+        {/* Search Bar */}
         <Search>
           <SearchInput
             placeholder="Search products..."
             onChange={(e) => onSearch(e.target.value)}
           />
         </Search>
+
+        {/* Spacer */}
+        <Box sx={{ flexGrow: 1 }} />
+
+        {/* 🔹 Home Icon Button */}
+        <IconButton
+          color="inherit"
+          onClick={() => navigate("/")}
+          sx={{ ml: 1 }}
+          title="Home"
+        >
+          <HomeIcon />
+        </IconButton>
+
+        {/* Auth Buttons */}
+        <Button color="inherit" onClick={() => navigate("/login")} sx={{ ml: 2 }}>
+          Login
+        </Button>
+        <Button color="inherit" onClick={() => navigate("/signup")} sx={{ ml: 1 }}>
+          Signup
+        </Button>
       </Toolbar>
     </MuiAppBar>
   );
