@@ -1,0 +1,35 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-content {
+    margin-top: 8px;
+  }
+  @media (max-width: 768px) {
+  .login-form {
+    width: 80%;
+    padding: 25px;
+    margin-top: 40px;
+  }
+}
+
+/* Mobile - Full width */
+@media (max-width: 480px) {
+  .login-form {
+    width: 90%;
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  .form-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .login-button {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+}

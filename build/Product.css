@@ -1,0 +1,110 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3f51b5;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  .search-bar {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .home-button,
+  .logout-button {
+    background-color: #f50057;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .category-button {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    color: #555;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .category-button.active {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .product-card {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .product-name {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .product-price {
+    color: #f50057;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  
+  .product-description {
+    font-size: 14px;
+    color: #777;
+    margin: 10px 0;
+  }
+  
+  .buy-button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
